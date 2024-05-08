@@ -1,45 +1,56 @@
-#include <stdio.h>
-#include <stdbool.h>
-#define MAX_CHAR 100
-typedef char Name[MAX_CHAR];
-Name New_Name;
+// Definimos un tipo de tipo Ability con sus características
+typedef struct {
+    char name[20]; // nombre de la habilidad
+    char description[40]; // descripción de la habilidad
+    char type[40]; // el tipo de la habilidad (temporal o directo)
+    int duration; // la duración por turnos de la habilidad temporal
+    int mod_att; // aumenta o disminuye su capacidad de ataque en combate
+    int mod_def; // aumenta o disminuye su capacidad de defensa en combate
+    int mod_hp; // aumenta o disminuye su capacidad de vida en combate
+}Ability;
+
+// Definimos lo que el usuario podrá implementar en el jugador 
 typedef struct{
-
-    char  hola; 
-}hola;
-
+    char name[20]; // nombre del jugador
+    int p_att; // puntos de ataque
+    int p_def; // puntos de defensa 
+    int p_hp; // puntos de vida
+    Ability *abilities[5]; // array de 5 habilidades del personaje
+}Player;
+// Definimos las características de los enemigos 
 typedef struct{
-    char name[50];
-    int attack;
-    int health;
-    int reinforcment;
-}Character; // definimos la estructura de personajes
+    char name[20]; // Nombre del enemigo
+    int p_att; // puntos de ataque
+    int p_def; // puntos de defensa
+    int p_hp; // puntos de vida
+}Enemy;
 
 
+typedef struct {
+    char response[100];     // Texto de respuesta
+    char preBattleNarrative[200];  // Texto de narración antes de enfrentarse a los enemigos
+    Enemy *enemies[3];       // Array de hasta 3 enemigos
+    int numEnemies;         // Número de enemigos
+    char postBattleNarrative[200]; // Texto de narración después de enfrentarse a los enemigos
+} Option;
 
+// Definimos la opcion de decisión
+typedef struct{
+    char question[200];     // Texto de la pregunta que presenta la decisión
+    Option *options[3];      // Array para almacenar hasta 3 opciones posibles
+    int numOptions;         // número de opciones disponibles
+}Decision;
 
-/*char Id(char *x){
-    char afi,neg;
-    printf("Introduzca su nombre de usuario porfavor");
-    fgets(New_Name,100,stdin);
-    printf("Hola %c preparado para tu aventura en este vertiginoso y trepidante mundo ?",New_Name);
-    printf("Espero que si %c",New_Name);
-}
-*/
+// Definimos las características que debe de tener un escenario en el juego
+typedef struct{
+    char name[20]; // Nombre del lugar
+    char description[100]; // Descripción del lugar
+    Decision *decisions; // Decisiones presentadas
+}Scenario;
 
-void Intro(){
-    printf("Comencemos ahora si con el contexto de este nuevo mundo\n\n");
-    printf("En un remoto e idílico lugar hace más de 600 años, donde la paz y la diversidad reinaba entre humanos y semihumanos, al que todos llamaban Serenis, la armonía entre seres vivos era ya considerada mundana, la simpatía se respiraba a raudales y la fuente motora era la magnanimidad y la vitalidad.\n\n");
-    printf("Pero un día nació un niño noble en los estratos más altos de la nobleza, pero con una horripilante condición física que deformaba su rostro, sus ojos estaban siempre de un color rojo carmesí, en su mirada se veía reflejada el tormento y la perdición, además su piel escamosa como los secretos más oscuros sepultados. Pero a pesar de todo, el rey Vitaly conocido por su nobleza y su integridad, decidió seguir adelante con este infortunio, pero con la única condición que no viera la luz del día y lo encerró en una mazmorra. Hasta que un día el infante logró salir y cuando el rey se enteró de lo sucedido, la bautizó con el nombre de Hefest, conocido como el dios de la grotesca, poco después de desterrarlo.\n\n");
-    printf("Lo que no sabía es que había creado un monstruo, que con el paso del tiempo se haría fuerte y uniría fuerzas con los demás monstruos exiliados, de lugares colindantes de los lugares más remotos e inhóspitos donde reina la maldad y el caos. No fue hasta años posteriores que sembraron la destrucción y devastaron Serenis y sus pueblos fronterizos.\n\n");
-}
-
- void menu(){
-    printf("1.Empezar aventura
-            2. Elegir un personje ")
-    
-    if()
-   
-    
-}
-
+Enemy *init_enemies(); // Creción de los enemigos
+Ability *init_abilities(); // Escoger las habilidades   
+Option *select_option(); // Crear las opciones
+Decision *select_decision(); // Crear decisiones en base a la opción
+Scenario *init_scenario(); // creación del escenario 
+Player *init_character(); // Creación del personaje
