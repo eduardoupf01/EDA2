@@ -13,6 +13,12 @@ static char *descriptions[] = {
     "5. Waterball"
 };
 
+static char *enemy_abilities[] = {
+    "1. Fire Punch",
+    "2. Direct Impact",
+    "3. Bomb"
+};
+
 // Creamos la función para implementar las habilidades 
 Ability *init_abilities(){ // reservamos memória para las 5 habilidades 
     Ability *abilities = malloc(5 * sizeof(Ability));
@@ -68,8 +74,35 @@ Player *init_character(){ // Reservamos memória para el personaje
     Ability *select_abilities;
     for (int i = 0; i < 5; i++) {
         scanf("%s",&select_abilities[i]);
-}
+    }
 }
 
+Enemy *init_enemies(){ // Definimos la función de los enemeigos
+    Enemy *enemies = malloc(sizeof(Enemy)); // Reservamos memoria para los enemigos 
+    if(enemies == NULL){// Aseguramos que no haya ningún error con la memória
+        printf("Hay un error de memoria");
+        exit(1);
+    }
+    enemies->p_att = 5;
+    enemies->p_def = 2;
+    enemies->p_hp = 25;
+    printf("Habilidades del enemigo: %c", enemy_abilities);
+    printf("Las stats del enemigo: \n");
+    printf("Puntos de ataque: %i\nPuntos de defensa: %i\nPuntos de vida: %i\n",enemies->p_att, enemies->p_def,enemies->p_hp);
 
+}
+/*
+Scenario *init_scenario(){ // definimos la función del escenario
+    Scenario *scenarios = malloc(6* sizeof(Scenario)); // reservamos memoria para los 6 escenarios
+    if (scenarios == NULL){
+        printf("Hay un error de memoria");
+        exit(1);
+    }
+  char *name_scenarios [] = {"Beggining", "Mithra", "Ruinas de Vandal", "River lake", "Yggdrasil"," Niflheim" }
+  char *descript_scenario [] = {"Te encuentras en Beggining, el escenario principal", "Mithra es un lugar misterioso situado en la montaña más alta jamas vista, repleto de misterios y de interminables cuevas "}
+
+  
+    
+}
+*/
 
