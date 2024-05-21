@@ -4,7 +4,15 @@
 #include <string.h>
 
 // Hacemos que el array que esta enforma global sea local del archivo, no acceso desde otro archivo
-
+/*
+char nombre_enemigos(){
+    char enemigos={yu}
+    int x=sizeof(enemigos);
+    int numeroAleatorio=0+rand()%(x-0+1);
+    return enemigos[numeroAleatorio];
+ 
+    }
+*/
 static char *descriptions[] = {
     "1. Healer (max HP)",
     "2. Physical boost",
@@ -78,31 +86,82 @@ Player *init_character(){ // Reservamos memória para el personaje
 }
 
 Enemy *init_enemies(){ // Definimos la función de los enemeigos
-    Enemy *enemies = malloc(sizeof(Enemy)); // Reservamos memoria para los enemigos 
-    if(enemies == NULL){// Aseguramos que no haya ningún error con la memória
+    Enemy *enemies = malloc(3 * sizeof(Enemy));
+    if (enemies == NULL) {
         printf("Hay un error de memoria");
         exit(1);
     }
-    enemies->p_att = 5;
-    enemies->p_def = 2;
-    enemies->p_hp = 25;
-    printf("Habilidades del enemigo: %c", enemy_abilities);
+    char *enemy_names[] = {"Goblin", "Orc", "Dragon"};
+    int p_atts[] = {5, 10, 20};
+    int p_defs[] = {2, 5, 10};
+    int p_hps[] = {25, 50, 100};
+    for (int i = 0; i < 3; i++) {
+        strcpy(enemies[i].name, enemy_names[i]);
+        enemies[i].p_att = p_atts[i];
+        enemies[i].p_def = p_defs[i];
+        enemies[i].p_hp = p_hps[i];
+    }
+    printf("Habilidades del enemigo: %s\n", enemy_abilities[0]);
     printf("Las stats del enemigo: \n");
-    printf("Puntos de ataque: %i\nPuntos de defensa: %i\nPuntos de vida: %i\n",enemies->p_att, enemies->p_def,enemies->p_hp);
+    printf("Puntos de ataque: %i\nPuntos de defensa: %i\nPuntos de vida: %i\n", enemies[0].p_att, enemies[0].p_def, enemies[0].p_hp);
+    return enemies;
 
 }
-/*
+
+
+Decision *select_decision(){
+        Decision *decisions = malloc(sizeof(Decision)); // reservamos memoria para los 6 escenarios
+    if (decisions == NULL){ // Aseguramos que no haya ningún error con la memória
+        printf("Hay un error de memoria");
+        exit(1);
+    char question1 = {"\nComo piensas avanzar y salir de esta cueva ?\n "};
+    strcpy(decisions->question,question1);
+
+    return decisions;
+
+}
+}
+
+Option *select_option(){
+        Option *options = malloc(6* sizeof(Scenario)); // reservamos memoria para los 6 escenarios
+    if (options == NULL){ // Aseguramos que no haya ningún error con la memória
+        printf("Hay un error de memoria");
+        exit(1);
+    }
+    char responses = {"\nSigues todo recto y te encuentras una luz al final\n"};
+    char responses1 = { "\nPrefieres ir por el camino más oscuro con la esperanza de poder encontrar una salida"};
+
+    strcpy(options->response,responses );
+    strcpy(options->response,responses1 );
+    
+    return options;
+}
+
+
 Scenario *init_scenario(){ // definimos la función del escenario
     Scenario *scenarios = malloc(6* sizeof(Scenario)); // reservamos memoria para los 6 escenarios
     if (scenarios == NULL){
         printf("Hay un error de memoria");
         exit(1);
     }
-  char *name_scenarios [] = {"Beggining", "Mithra", "Ruinas de Vandal", "River lake", "Yggdrasil"," Niflheim" }
-  char *descript_scenario [] = {"Te encuentras en Beggining, el escenario principal", "Mithra es un lugar misterioso situado en la montaña más alta jamas vista, repleto de misterios y de interminables cuevas "}
+  char *name_scenarios [] = {"Beggining", "Mithra", "Ruinas de Vandal", "River lake", "Yggdrasil"," Niflheim" };
+    char *descript_scenario[] = {
+    "Te encuentras en el Beggining, el escenario principal donde la aventura apenas comienza. Es un lugar misterioso lleno de promesas y peligros, rodeado de una densa niebla que oculta sus secretos.",
+    "Mithra es un valle sagrado, donde los antiguos dioses dejaron su huella en forma de templos y estatuas. Las leyendas cuentan que aquí es donde el mundo de los dioses se encuentra con el de los mortales.",
+    "Las Ruinas de Vandal son un lugar olvidado por el tiempo, donde antaño se alzaba una gran ciudad. Ahora, solo quedan ruinas cubiertas por la maleza y el misterio de un pasado perdido.",
+    "En River lake, el agua cristalina refleja el cielo eterno de Asgard. Este lugar tranquilo esconde secretos bajo su superficie serena, donde los ríos fluyen hacia los reinos de los dioses.",
+    "Yggdrasil, el Árbol del Mundo, se alza imponente ante ti, sus ramas se extienden hacia los cielos y las raíces se hunden en las profundidades de los nueve mundos. Es el eje que sostiene la existencia misma.",
+    "Niflheim, el reino de la niebla eterna y el frío implacable. Aquí, las almas de los malvados son castigadas en un eterno invierno, mientras las sombras acechan entre la niebla espesa."
+};
 
+    for (int i = 0; i < 6; i++) {
+        strcpy(scenarios[i].name, name_scenarios[i]);
+        strcpy(scenarios[i].description, descript_scenario[i]);
+    }
+
+    return scenarios;
   
     
 }
-*/
+
 

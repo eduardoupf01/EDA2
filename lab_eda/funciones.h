@@ -44,7 +44,7 @@ typedef struct{
 // Definimos las características que debe de tener un escenario en el juego
 typedef struct{
     char name[20]; // Nombre del lugar
-    char description[100]; // Descripción del lugar
+    char description[200]; // Descripción del lugar
     Decision *decisions; // Decisiones presentadas
 }Scenario;
 

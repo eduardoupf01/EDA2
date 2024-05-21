@@ -41,3 +41,4 @@ int main() {
     free(abilities);
     free(selected_abilities);
 }
+
