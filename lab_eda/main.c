@@ -35,10 +35,42 @@ int main() {
     for (int i = 0; i < 4; i++) {
         printf("%s\n", selected_abilities[i].description);
     }
+     Scenario *scenarios = init_scenario();
+    printf("Selecciona un escenario:\n");
+    for (int i = 0; i < 6; i++) {
+        printf("%d. %s - %s\n", i + 1, scenarios[i].name, scenarios[i].description);
+    }
+        int scenario_choice;
+    scanf("%d", &scenario_choice);
+    getchar(); // Para limpiar el buffer de entrada
+    while (scenario_choice < 1 || scenario_choice > 6) {
+        printf("Selección no válida. Intente de nuevo: ");
+        scanf("%d", &scenario_choice);
+        getchar(); // Para limpiar el buffer de entrada
+    }
+
+    Scenario *chosen_scenario = &scenarios[scenario_choice - 1];
+    printf("Has seleccionado el escenario: %s\n", chosen_scenario->name);
+    printf("%s\n", chosen_scenario->description);
+
+    Decision *decision = chosen_scenario->decisions;
+    printf("%s\n", decision->question);
+    for (int i = 0; i < decision->numOptions; i++) {
+        printf("%d. %s\n", i + 1, decision->options[i]->response);
+    }
+
+    int option_choice;
+    scanf("%d", &option_choice);
+    while (option_choice < 1 || option_choice > decision->numOptions) {
+        printf("Selección no válida. Intente de nuevo: ");
+        scanf("%d", &option_choice);
+    }
+
+    Option *chosen_option = decision->options[option_choice - 1];
+    printf("%s\n", chosen_option->preBattleNarrative);
 
     // Liberamos la memoria asignada
     free(player);
     free(abilities);
     free(selected_abilities);
 }
-
