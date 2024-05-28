@@ -1,8 +1,8 @@
 // Definimos un tipo de tipo Ability con sus características
 typedef struct {
-    char name[20]; // nombre de la habilidad
+    char name[30]; // nombre de la habilidad
     char description[40]; // descripción de la habilidad
-    char type[40]; // el tipo de la habilidad (temporal o directo)
+    char type[15]; // el tipo de la habilidad (temporal o directo)
     int duration; // la duración por turnos de la habilidad temporal
     int mod_att; // aumenta o disminuye su capacidad de ataque en combate
     int mod_def; // aumenta o disminuye su capacidad de defensa en combate
@@ -17,6 +17,8 @@ typedef struct{
     int p_hp; // puntos de vida
     Ability *abilities[5]; // array de 5 habilidades del personaje
 }Player;
+
+
 // Definimos las características de los enemigos 
 typedef struct{
     char name[20]; // Nombre del enemigo
@@ -54,3 +56,4 @@ Option *select_option(); // Crear las opciones
 Decision *select_decision(); // Crear decisiones en base a la opción
 Scenario *init_scenario(); // creación del escenario 
 Player *init_character(); // Creación del personaje
+char welcome();

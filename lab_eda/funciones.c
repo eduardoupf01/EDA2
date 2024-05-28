@@ -15,11 +15,11 @@
         }
     */
     static char *descriptions[] = {
-        "1. Healer (max HP)",
-        "2. Physical boost",
-        "3. Firewall",
-        "4. Zap (electric)",
-        "5. Waterball"
+        "1. Healer -> Sube los puntos de HP al max",
+        "2. Physical boost ->  Menos perdida de hp por ataque recibido",
+        "3. Fireball -> Ataque de bola de fuego",
+        "4. Zap ->  Descarga electrica",
+        "5. Waterball -> Ataque de bola de agua"
     };
 
     static char *enemy_abilities[] = {
@@ -28,20 +28,67 @@
         "3. Bomb"
     };
 
+    char welcome(){
+        printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+        printf("Bienvenido a este mundo llamado Vinland en el que tendras que superar diferentes enemigos para poder completar el juego\nMucha Suerte! ;)");
+        printf("\n--------------------------------------------------------------------------------------------------------------------------------\n\n");
+    }
     // Creamos la función para implementar las habilidades 
     Ability *init_abilities(){ // reservamos memória para las 5 habilidades 
-        Ability *abilities = malloc(5 * sizeof(Ability));
+        Ability *abilities = malloc(sizeof(Ability));
         if(abilities == NULL){ // Hacemos úso del if para asegurarnos que no hay ningún error con la memória
             printf("Hay un error de memória");
             exit(1); // Si devuelve 1 significa que se ha ejecutado con éxito este error
         } 
-        char *abilities_names[] =  {"Skill_1", "Skill_2", "Skill_3", "Skill_4", "Skill_5"};
         char *types_abilities[] = {" Es directo", " Es temporal", " Es directo", " Es directo", " Es directo"};
         int modiffiers_att[] = {0,0,25,15,35}; // Asignmos que habilidades modifican el tipo (ataque)  y cuanto lo incrementan
         int modiffiers_def[] = {0,30,0,0,0}; // Asignmos que habilidades modifican el tipo (defensa) y cuanto lo incrementan
         int modiffiers_hp[] = {10,0,0,0,0}; // Asignmos que habilidades modifican el tipo (vida) y cuanto lo incrementan
-        int temp_hability_duration = 2;
-        for(int i = 0; i < 5; i++){// Asignamos todas las caraterísticas que tienen las habilidades 
+        fgets(abilities->name,20,stdin); // Seleccion de la habilidades por terminal
+        if (abilities->name == "Healer"){
+            abilities->description[0] = *descriptions[0];
+            abilities->type[0] = *types_abilities[0];
+            abilities->mod_att = *modiffiers_att[0];
+            abilities->mod_def = *modiffiers_def[0];
+            abilities->mod_hp = *modiffiers_hp[0];
+            abilities->duration = 0;
+        }
+        if(abilities->name == "Physical Boost"){
+            abilities->description[1] = *descriptions[1];
+            abilities->type[1] = *types_abilities[1];
+            abilities->mod_att = *modiffiers_att[1];
+            abilities->mod_def = *modiffiers_def[1];
+            abilities->mod_hp = *modiffiers_hp[1];
+            abilities->duration = 2;
+        }
+        if (abilities->name == "Firewall"){
+            abilities->description[2] = *descriptions[2];
+            abilities->type[2] = *types_abilities[2];
+            abilities->mod_att = *modiffiers_att[2];
+            abilities->mod_def = *modiffiers_def[2];
+            abilities->mod_hp = *modiffiers_hp[2];
+            abilities->duration = 0;
+        }    
+        if (abilities->name == "Zap"){
+            abilities->description[3] = *descriptions[3];
+            abilities->type[3] = *types_abilities[3];
+            abilities->mod_att = *modiffiers_att[3];
+            abilities->mod_def = *modiffiers_def[3];
+            abilities->mod_hp = *modiffiers_hp[3];
+            abilities->duration = 0;
+        }
+        if (abilities->name == "Waterball"){
+            abilities->description[4] = *descriptions[4];
+            abilities->type[4] = *types_abilities[4];
+            abilities->mod_att = *modiffiers_att[4];
+            abilities->mod_def = *modiffiers_def[4];
+            abilities->mod_hp = *modiffiers_hp[4];
+            abilities->duration = 0;
+        }
+        
+
+
+        /*for(int i = 0; i < 5; i++){// Asignamos todas las caraterísticas que tienen las habilidades 
             strcpy(abilities[i].name,abilities_names[i]);
             strcpy(abilities[i].description, descriptions[i]);
             strcpy(abilities[i].type, types_abilities[i]);
@@ -51,8 +98,10 @@
             if(i == 1){ // Señalizamos que la segunda habilidad es temporal
                 abilities[i].duration = 2; // La segunda habilidad dura 2 turnos 
             }else 
-                abilities[i].duration = 0; // Si la habilidad es directa su duración es igual a 0   
+                abilities[i].duration = 0; // Si la habilidad es directa su duración es igual a 0
+           
         }
+        */
         
         return abilities;
 
@@ -68,22 +117,32 @@
         printf("Introduzca aqui el ID de su nuevo usuario:\n"); // Pedimos al usuario que ingrese el nombre deseado del personaje
         fgets(character->name,20,stdin); // fgets para aseguranos que no hay problemas con la asignación de strings y copiamos el nombre
         strtok(character->name, "\n"); // Elimina el carácter de nueva línea de fgets
-        printf("Abajo vera las stats iniciales de su personaje, que a medida que vaya avanzando podra mejorarlas:\n"); // Indicaciones para ver las stats iniciales
+        printf("\nAbajo vera las stats %s iniciales de su personaje, que a medida que vaya avanzando podra mejorarlas:\n",character->name); // Indicaciones para ver las stats iniciales
         character->p_att = 10; // Inicializamos los puntos de ataque
         character->p_def = 5; // Inicializamos los puntos de defensa
         character->p_hp = 50; // Inicializamos los puntos de vida
         printf("Puntos de ataque: %i\nPuntos de defensa: %i\nPuntos de vida: %i\n", character->p_att, character->p_def, character->p_hp);
-        Ability *abilities = init_abilities();
+        //Ability *abilities = init_abilities();
+        printf("Habilidades\n");
         for (int i = 0; i < 5; i++) {
-            printf("%s\n", abilities[i].description);
+            //printf("%s\n", abilities[i].description);
+            printf("%s\n", descriptions[i]);
         }
         printf("\n");
         printf("Escoga 4 de las 5 habilidades que se le han expuesto anteriormente, pienselo bien y con estrategia");
         printf("\nBuena suerte!\n");
-        Ability *select_abilities;
-        for (int i = 0; i < 5; i++) {
-            scanf("%s",&select_abilities[i]);
+        //Ability *select_abilities;
+        Ability *selected_abs[4];
+        for (int i = 0; i < 4; i++) {
+            //scanf("%s",&select_abilities[i]);
+            character->abilities[i] = init_abilities();
         }
+        printf("\nLas habilidades seleccionadas son:\n");
+        for (int i = 0; i < 4; i++) {
+            //scanf("%s",&select_abilities[i]);
+            printf("[%i].%s", i+1, character->abilities[i]);
+        }
+        return character;
     }
 
     Enemy *init_enemies(){ // Definimos la función de los enemeigos

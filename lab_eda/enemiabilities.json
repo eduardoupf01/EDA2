@@ -1,0 +1,40 @@
+{
+    "abilities": [
+        {
+            "name": "Fire Punch",
+            "description": "1. Fire Punch",
+            "type": "Es directo",
+            "duration": 0,
+            "mod_att": 10,
+            "mod_def": 0,
+            "mod_hp": 0
+        },
+        {
+            "name": "Direct Impact",
+            "description": "2. Direct Impact",
+            "type": "Es directo",
+            "duration": 0,
+            "mod_att": 15,
+            "mod_def": 0,
+            "mod_hp": 0
+        },
+        {
+            "name": "Bomb",
+            "description": "3. Bomb",
+            "type": "Es directo",
+            "duration": 0,
+            "mod_att": 20,
+            "mod_def": 0,
+            "mod_hp": 0
+        },
+        {
+            "name": "Curation",
+            "description": "4. Curation",
+            "type": "Es directo",
+            "duration": 0,
+            "mod_att": 0,
+            "mod_def": 0,
+            "mod_hp": 20
+        }
+    ]
+}
