@@ -48,41 +48,41 @@
         if (abilities->name == "Healer"){
             abilities->description[0] = *descriptions[0];
             abilities->type[0] = *types_abilities[0];
-            abilities->mod_att = *modiffiers_att[0];
-            abilities->mod_def = *modiffiers_def[0];
-            abilities->mod_hp = *modiffiers_hp[0];
+            abilities->mod_att = modiffiers_att[0];
+            abilities->mod_def = modiffiers_def[0];
+            abilities->mod_hp = modiffiers_hp[0];
             abilities->duration = 0;
         }
         if(abilities->name == "Physical Boost"){
             abilities->description[1] = *descriptions[1];
             abilities->type[1] = *types_abilities[1];
-            abilities->mod_att = *modiffiers_att[1];
-            abilities->mod_def = *modiffiers_def[1];
-            abilities->mod_hp = *modiffiers_hp[1];
+            abilities->mod_att = modiffiers_att[1];
+            abilities->mod_def = modiffiers_def[1];
+            abilities->mod_hp = modiffiers_hp[1];
             abilities->duration = 2;
         }
         if (abilities->name == "Firewall"){
             abilities->description[2] = *descriptions[2];
             abilities->type[2] = *types_abilities[2];
-            abilities->mod_att = *modiffiers_att[2];
-            abilities->mod_def = *modiffiers_def[2];
-            abilities->mod_hp = *modiffiers_hp[2];
+            abilities->mod_att = modiffiers_att[2];
+            abilities->mod_def = modiffiers_def[2];
+            abilities->mod_hp = modiffiers_hp[2];
             abilities->duration = 0;
         }    
         if (abilities->name == "Zap"){
             abilities->description[3] = *descriptions[3];
             abilities->type[3] = *types_abilities[3];
-            abilities->mod_att = *modiffiers_att[3];
-            abilities->mod_def = *modiffiers_def[3];
-            abilities->mod_hp = *modiffiers_hp[3];
+            abilities->mod_att = modiffiers_att[3];
+            abilities->mod_def = modiffiers_def[3];
+            abilities->mod_hp = modiffiers_hp[3];
             abilities->duration = 0;
         }
         if (abilities->name == "Waterball"){
             abilities->description[4] = *descriptions[4];
             abilities->type[4] = *types_abilities[4];
-            abilities->mod_att = *modiffiers_att[4];
-            abilities->mod_def = *modiffiers_def[4];
-            abilities->mod_hp = *modiffiers_hp[4];
+            abilities->mod_att = modiffiers_att[4];
+            abilities->mod_def = modiffiers_def[4];
+            abilities->mod_hp = modiffiers_hp[4];
             abilities->duration = 0;
         }
         
@@ -174,12 +174,13 @@
         if (decisions == NULL){ // Aseguramos que no haya ningún error con la memória
             printf("Hay un error de memoria");
             exit(1);
-        char *question1 = {"\nComo piensas avanzar y salir de esta cueva ?\n "};
-        strcpy(decisions->question,question1);
+        }
+        printf("\n[DECISION] Como piensas avanzar y superar la neblina que rodea tu camino?\n");
+
 
         return decisions;
 
-    }
+    
     }
 
     Option *select_option(){
@@ -199,25 +200,43 @@
 
 
     Scenario *init_scenario(){ // definimos la función del escenario
-        Scenario *scenarios = malloc(6* sizeof(Scenario)); // reservamos memoria para los 6 escenarios
+        Scenario *scenarios = malloc(sizeof(Scenario)); // reservamos memoria para los 6 escenarios
         if (scenarios == NULL){
             printf("Hay un error de memoria");
             exit(1);
         }
-    char *name_scenarios [] = {"Beggining", "Mithra", "Ruinas de Vandal", "River lake", "Yggdrasil"," Niflheim" };
-        char *descript_scenario[] = {
+    // char name_scenarios_1 [] = {"Beggining", "Mithra", "Ruinas de Vandal", "River lake", "Yggdrasil"," Niflheim" };
+        char *name_scenarios_1 = "Beggining";
+        char *name_scenarios_2 = "Mithra";
+        char *name_scenarios_3 = "Ruinas de Vandal";
+        char *name_scenarios_4 = "River lake";
+        char *name_scenarios_5 = "Yggdrasil";
+        char *name_scenarios_6 = "Niflheim";
+    /* char *descript_scenario[] = {
         "Te encuentras en el Beggining, el escenario principal donde la aventura apenas comienza. Es un lugar misterioso lleno de promesas y peligros, rodeado de una densa niebla que oculta sus secretos.",
         "Mithra es un valle sagrado, donde los antiguos dioses dejaron su huella en forma de templos y estatuas. Las leyendas cuentan que aquí es donde el mundo de los dioses se encuentra con el de los mortales.",
         "Las Ruinas de Vandal son un lugar olvidado por el tiempo, donde antaño se alzaba una gran ciudad. Ahora, solo quedan ruinas cubiertas por la maleza y el misterio de un pasado perdido.",
         "En River lake, el agua cristalina refleja el cielo eterno de Asgard. Este lugar tranquilo esconde secretos bajo su superficie serena, donde los ríos fluyen hacia los reinos de los dioses.",
         "Yggdrasil, el Árbol del Mundo, se alza imponente ante ti, sus ramas se extienden hacia los cielos y las raíces se hunden en las profundidades de los nueve mundos. Es el eje que sostiene la existencia misma.",
         "Niflheim, el reino de la niebla eterna y el frío implacable. Aquí, las almas de los malvados son castigadas en un eterno invierno, mientras las sombras acechan entre la niebla espesa."
-    };
+    }*/;
 
-        for (int i = 0; i < 6; i++) {
-            strcpy(scenarios[i].name, name_scenarios[i]);
-            strcpy(scenarios[i].description, descript_scenario[i]);
-        }
+        char *descript_scenario_1 =  "Te encuentras en el Beggining, el escenario principal donde la aventura apenas comienza. Es un lugar misterioso lleno depromesas y peligros, rodeado de una densa niebla que oculta sus secretos";
+        char *descript_scenario_2 = "Mithra es un valle sagrado, donde los antiguos dioses dejaron su huella en forma de templos y estatuas. Las leyendas cuentan que aquí es donde el mundo de los dioses se encuentra con el de los mortales.";
+        char *descript_scenario_3 = "Las Ruinas de Vandal son un lugar olvidado por el tiempo, donde antaño se alzaba una gran ciudad. Ahora, solo quedan ruinas cubiertas por la maleza y el misterio de un pasado perdido.";
+        char *descript_scenario_4 = "En River lake, el agua cristalina refleja el cielo eterno de Asgard. Este lugar tranquilo esconde secretos bajo su superficie serena, donde los ríos fluyen hacia los reinos de los dioses.";
+        char *descript_scenario_5 = "Yggdrasil, el Árbol del Mundo, se alza imponente ante ti, sus ramas se extienden hacia los cielos y las raíces se hunden en las profundidades de los nueve mundos. Es el eje que sostiene la existencia misma.";
+        char *descript_scenario_6 =  "Niflheim, el reino de la niebla eterna y el frío implacable. Aquí, las almas de los malvados son castigadas en un eterno invierno, mientras las sombras acechan entre la niebla espesa.";
+
+
+
+            strcpy(scenarios->name, name_scenarios_1);
+            strcpy(scenarios->description, descript_scenario_1);
+
+            printf("\n\n[ESCENARIO] -> %s\n",scenarios->name);
+            printf("\nDescripcion -> %s", scenarios->description);
+            printf("\n");
+            printf("\n[DECISION] -> Como piensas avanzar y superar la neblina que rodea tu camino?\n");
 
         return scenarios;
     

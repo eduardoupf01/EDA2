@@ -15,7 +15,7 @@ typedef struct{
     int p_att; // puntos de ataque
     int p_def; // puntos de defensa 
     int p_hp; // puntos de vida
-    Ability *abilities[5]; // array de 5 habilidades del personaje
+    Ability *abilities[4]; // array de 5 habilidades del personaje
 }Player;
 
 
