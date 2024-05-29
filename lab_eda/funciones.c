@@ -169,7 +169,7 @@
     }
 
 
-    Decision *select_decision(){
+    /*Decision *select_decision(){
             Decision *decisions = malloc(sizeof(Decision)); // reservamos memoria para los 6 escenarios
         if (decisions == NULL){ // Aseguramos que no haya ningún error con la memória
             printf("Hay un error de memoria");
@@ -181,31 +181,30 @@
         return decisions;
 
     
-    }
-
+    }*/
+    
     Option *select_option(){
             Option *options = malloc(6* sizeof(Scenario)); // reservamos memoria para los 6 escenarios
         if (options == NULL){ // Aseguramos que no haya ningún error con la memória
             printf("Hay un error de memoria");
             exit(1);
         }
-        char *responses = {"\nSigues todo recto y te encuentras una luz al final\n"};
-        char *responses1 = { "\nPrefieres ir por el camino más oscuro con la esperanza de poder encontrar una salida"};
-
-        strcpy(options->response,responses );
-        strcpy(options->response,responses1 );
+        Decision *op;
+        op->numOptions = 2;
+        printf("\nNumero de opciones disponibles -> %i",op->numOptions);
         
         return options;
     }
 
 
     Scenario *init_scenario(){ // definimos la función del escenario
-        Scenario *scenarios = malloc(sizeof(Scenario)); // reservamos memoria para los 6 escenarios
+        Scenario *scenarios = malloc(sizeof(Scenario)); // reservamos memoria para los  escenarios
         if (scenarios == NULL){
             printf("Hay un error de memoria");
             exit(1);
         }
     // char name_scenarios_1 [] = {"Beggining", "Mithra", "Ruinas de Vandal", "River lake", "Yggdrasil"," Niflheim" };
+        Enemy *enemies = init_enemies();
         char *name_scenarios_1 = "Beggining";
         char *name_scenarios_2 = "Mithra";
         char *name_scenarios_3 = "Ruinas de Vandal";
@@ -219,7 +218,7 @@
         "En River lake, el agua cristalina refleja el cielo eterno de Asgard. Este lugar tranquilo esconde secretos bajo su superficie serena, donde los ríos fluyen hacia los reinos de los dioses.",
         "Yggdrasil, el Árbol del Mundo, se alza imponente ante ti, sus ramas se extienden hacia los cielos y las raíces se hunden en las profundidades de los nueve mundos. Es el eje que sostiene la existencia misma.",
         "Niflheim, el reino de la niebla eterna y el frío implacable. Aquí, las almas de los malvados son castigadas en un eterno invierno, mientras las sombras acechan entre la niebla espesa."
-    }*/;
+    };*/
 
         char *descript_scenario_1 =  "Te encuentras en el Beggining, el escenario principal donde la aventura apenas comienza. Es un lugar misterioso lleno depromesas y peligros, rodeado de una densa niebla que oculta sus secretos";
         char *descript_scenario_2 = "Mithra es un valle sagrado, donde los antiguos dioses dejaron su huella en forma de templos y estatuas. Las leyendas cuentan que aquí es donde el mundo de los dioses se encuentra con el de los mortales.";
@@ -232,17 +231,47 @@
 
             strcpy(scenarios->name, name_scenarios_1);
             strcpy(scenarios->description, descript_scenario_1);
+            scenarios->decisions.numOptions=2;
+            char q[] = "Como piensas avanzar y superar la neblina que rodea tu camino?\n";
+            strcpy(scenarios->decisions.question, q);
+            
 
             printf("\n\n[ESCENARIO] -> %s\n",scenarios->name);
             printf("\nDescripcion -> %s", scenarios->description);
             printf("\n");
-            printf("\n[DECISION] -> Como piensas avanzar y superar la neblina que rodea tu camino?\n");
+            printf("\n[DECISION] -> %s",scenarios->decisions.question);
+            printf("\nNumero de opciones disponibles -> %i",scenarios->decisions.numOptions);
+            char *response_1 = "Decides avanzar con valentia hacia el frente y te puede encontrar algun enemigo";
+            char *response_2 = "Decides tomar un camino alternativo y por azares del destino llegas al fin de la neblina sin nigun problema";
+            strcpy(scenarios->decisions.options[0].response, response_1);
+            strcpy(scenarios->decisions.options[1].response, response_2);
+
+            // Generar un número aleatorio de enemigos para la opción 1
+            srand(time(NULL)); // Inicializar el generador de números aleatorios
+            scenarios->decisions.options[0].numEnemies = rand() % 4; // Número aleatorio de 0 a 3
+
+            // Asignar enemigos aleatorios a la opción 1
+             for (int i = 0; i < scenarios->decisions.options[0].numEnemies; i++) {
+                scenarios->decisions.options[0].enemies[i] = enemies[i];
+            }
+            printf("\n-------------------------------------------------------------------------------------------");
+            printf("\n[OPCION 1] -> %s",scenarios->decisions.options[0].response);
+            printf("\nNumero de enemigos en opcion 1 -> %d", scenarios->decisions.options[0].numEnemies);
+            for (int i = 0; i < scenarios->decisions.options[0].numEnemies; i++) {
+            printf("\n[Enemigo %d] -> %s", i + 1, scenarios->decisions.options[0].enemies[i].name);
+            printf("\nPuntos de ataque -> %d", scenarios->decisions.options[0].enemies[i].p_att);
+            printf("\nPuntos de defensa -> %d", scenarios->decisions.options[0].enemies[i].p_def);
+            printf("\nPuntos de vida -> %d", scenarios->decisions.options[0].enemies[i].p_hp);
+            }
+
+            printf("\n[OPCION 2] -> %s",scenarios->decisions.options[1].response);
+            printf("\n-------------------------------------------------------------------------------------------");
 
         return scenarios;
     
-        
     }
 
+    
 int combat(Player* player, Enemy* enemy){//to let the user fight an enemy, return 0 if the user lost
     int totalTurns = 10; // Numero de turnos (se puede cambiar)
     Queue* turnsQueue = randomTurns(totalTurns);

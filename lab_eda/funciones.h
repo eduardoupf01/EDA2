@@ -29,9 +29,9 @@ typedef struct{
 
 
 typedef struct {
-    char response[100];     // Texto de respuesta
+    char response[150];     // Texto de respuesta
     char preBattleNarrative[200];  // Texto de narración antes de enfrentarse a los enemigos
-    Enemy *enemies[3];       // Array de hasta 3 enemigos
+    Enemy enemies[3];       // Array de hasta 3 enemigos
     int numEnemies;         // Número de enemigos
     char postBattleNarrative[200]; // Texto de narración después de enfrentarse a los enemigos
 } Option;
@@ -39,7 +39,7 @@ typedef struct {
 // Definimos la opcion de decisión
 typedef struct{
     char question[200];     // Texto de la pregunta que presenta la decisión
-    Option *options[3];      // Array para almacenar hasta 3 opciones posibles
+    Option options[2];      // Array para almacenar hasta 3 opciones posibles
     int numOptions;         // número de opciones disponibles
 }Decision;
 
@@ -47,7 +47,7 @@ typedef struct{
 typedef struct{
     char name[20]; // Nombre del lugar
     char description[200]; // Descripción del lugar
-    Decision *decisions; // Decisiones presentadas
+    Decision decisions; // Decisiones presentadas
 }Scenario;
 
 Enemy *init_enemies(); // Creción de los enemigos

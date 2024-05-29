@@ -12,6 +12,5 @@ int main() {
 
     printf("\n\nPrimer Nivel");
     Scenario *scenario = init_scenario();
-    printf("\nTodo joya ");
-
+    
 }
