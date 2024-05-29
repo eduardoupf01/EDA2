@@ -195,6 +195,7 @@ int playScene(Scene* scene, Character* player) {
     }
 
     // Return the index of the next scene to move to (can be modified as needed)
+    printf("You have explored the enviroment, now you have more clues to find the legendary wand.\n\n");
     return choice; // Simplified, you may need a better way to choose next scene
 }
 

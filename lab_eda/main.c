@@ -17,7 +17,7 @@ int main() {
     }
 
     if (player.hp > 0) {
-        printf("Congratulations, you have completed the game!\n");
+        printf("Congratulations, you have now the legendary magic wand and completed the game!\n");
     } else {
         printf("Game over!\n");
     }
