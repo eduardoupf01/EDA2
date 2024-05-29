@@ -80,7 +80,7 @@ void initScenes(Scene scenes[]) {
     initEnemies(allEnemies);
 
     // Scenario 1
-    strcpy(scenes[0].name, "THE FOREST");
+    strcpy(scenes[0].name, "NILFHEIM THE LAND OF HIGH ELFS");
     strcpy(scenes[0].description, "You are in a dark forest. There are three paths ahead.");
     strcpy(scenes[0].decision.question, "Which path do you choose?");
     strcpy(scenes[0].decision.options[0].description, "Take the left path.");
